@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.igorbag.githubsearch.R
+import br.com.igorbag.githubsearch.databinding.RepositoryItemBinding
 import br.com.igorbag.githubsearch.domain.Repository
 
 class RepositoryAdapter(private val repositories: List<Repository>) :
@@ -15,16 +16,19 @@ class RepositoryAdapter(private val repositories: List<Repository>) :
 
     // Cria uma nova view
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.repository_item, parent, false)
-        return ViewHolder(view)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = RepositoryItemBinding.inflate(inflater, parent, false)
+
+        return ViewHolder(binding)
     }
 
     // Pega o conteudo da view e troca pela informacao de item de uma lista
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //@TODO 8 -  Realizar o bind do viewHolder
+        //@ 8 -  Realizar o bind do viewHolder
         //Exemplo de Bind
         //  holder.preco.text = repositories[position].atributo
+
+        holder.bind(repositories[position])
 
         // Exemplo de click no item
         //holder.itemView.setOnClickListener {
@@ -38,18 +42,22 @@ class RepositoryAdapter(private val repositories: List<Repository>) :
     }
 
     // Pega a quantidade de repositorios da lista
-    //@TODO 9 - realizar a contagem da lista
-    override fun getItemCount(): Int = 0
+    // 9 - realizar a contagem da lista
+    override fun getItemCount(): Int = repositories.size
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        //@TODO 10 - Implementar o ViewHolder para os repositorios
+    class ViewHolder(private val binding: RepositoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        // 10 - Implementar o ViewHolder para os repositorios
         //Exemplo:
         //val atributo: TextView
-
-        //init {
-        //    view.apply {
-        //        atributo = findViewById(R.id.item_view)
-        //    }
+        fun bind(item: Repository) {
+            binding.tvName.text = item.name
+//            binding.tvRepoDescription.text = item.description
+//            binding.tvRepoLanguage.text = item.language
+//            binding.chipStar.text = item.stargazersCount.toString()
+//
+//            Glide.with(binding.root.context)
+//                .load(item.owner.avatarURL).into(binding.ivOwner)
+        }
 
     }
 }
