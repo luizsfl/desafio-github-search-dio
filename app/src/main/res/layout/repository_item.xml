@@ -45,42 +45,87 @@
                 android:orientation="vertical"
                 android:layout_margin="10dp"
                 >
-                <TextView
-                    android:id="@+id/tv_name"
-                    style="@style/TextAppearance.AppCompat.Body2"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    tools:text="Nome do repositorio"
-                    android:textStyle="bold"
-                    />
-                <TextView
-                    android:id="@+id/tv_see"
-                    style="@style/TextAppearance.AppCompat.Body2"
+                    >
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/icone_git"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        style="@style/TextAppearance.AppCompat.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        tools:text="Nome do repositorio"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    tools:text="Estrela: 0"
-                    android:textStyle="bold"
-                    />
-                <TextView
-                    android:id="@+id/tv_fork"
-                    style="@style/TextAppearance.AppCompat.Body2"
+                    >
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/star_24"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvStar"
+                        style="@style/TextAppearance.AppCompat.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        tools:text="Estrela: 0"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    tools:text="Fork: 0"
-                    android:textStyle="bold"
-                    />
-                <TextView
-                    android:id="@+id/tv_star"
-                    style="@style/TextAppearance.AppCompat.Body2"
+                    >
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/baseline_visibility_24"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_see"
+                        style="@style/TextAppearance.AppCompat.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        tools:text="Olhando: 0"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    tools:text="Estrela: 0"
-                    android:textStyle="bold"
-                    />
+                    >
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/baseline_mediation_24"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_fork"
+                        style="@style/TextAppearance.AppCompat.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        tools:text="Fork: 0"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
 
             </LinearLayout>
 

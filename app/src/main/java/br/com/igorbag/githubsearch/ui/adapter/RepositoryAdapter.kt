@@ -38,7 +38,7 @@ class RepositoryAdapter(private val repositories: List<Repository>) :
 
     class ViewHolder(val binding: RepositoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Repository) {
-            binding.tvName.text = "Nome: ${item.name}"
+            binding.tvName.text = "Repositorio: ${item.name}"
             binding.tvStar.text = "Estrela: ${item.stargazersCount}"
             binding.tvFork.text = "Fork: ${item.forks_count}"
             binding.tvSee.text  = "Assistindo: ${item.watchers_count}"

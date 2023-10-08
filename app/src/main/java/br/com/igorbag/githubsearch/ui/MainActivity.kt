@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import br.com.igorbag.githubsearch.R
 import br.com.igorbag.githubsearch.data.GitHubService
 import br.com.igorbag.githubsearch.databinding.ActivityMainBinding
@@ -73,6 +74,7 @@ class MainActivity : AppCompatActivity() {
     fun getAllReposByUserName(name:String) {
 
         if(name.isNotEmpty()) {
+            binding.progressBar.isVisible = true
             gitHubService.getAllRepositoriesByUser(name)
                 .enqueue(object : Callback<List<Repository>> {
                     override fun onResponse(
@@ -90,11 +92,13 @@ class MainActivity : AppCompatActivity() {
                                 Toast.LENGTH_LONG
                             ).show()
                         }
+                        binding.progressBar.isVisible = false
                     }
 
                     override fun onFailure(call: Call<List<Repository>>, t: Throwable) {
                         Toast.makeText(this@MainActivity, R.string.response_erro, Toast.LENGTH_LONG)
                             .show()
+                        binding.progressBar.isVisible = false
                     }
 
                 })
