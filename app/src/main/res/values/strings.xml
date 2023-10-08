@@ -3,5 +3,7 @@
     <string name="nome_usuario">Nome do usuário</string>
     <string name="confirmar">Confirmar</string>
     <string name="response_erro">Algo deu errado, favor tentar novamente.</string>
+    <string name="saved_nome">saved_nome</string>
+    <string name="BASE_URL">https://api.github.com/</string>
 
 </resources>
