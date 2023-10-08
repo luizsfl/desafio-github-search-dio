@@ -11,6 +11,7 @@ import br.com.igorbag.githubsearch.data.GitHubService
 import br.com.igorbag.githubsearch.databinding.ActivityMainBinding
 import br.com.igorbag.githubsearch.domain.Repository
 import br.com.igorbag.githubsearch.ui.adapter.RepositoryAdapter
+import com.bumptech.glide.Glide
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,6 +33,11 @@ class MainActivity : AppCompatActivity() {
         setupRetrofit()
         getAllReposByUserName(binding.etNomeUsuario.text.toString())
         setupListeners()
+        setupView()
+    }
+
+    fun setupView(){
+        getSupportActionBar()?.hide();
     }
 
     private fun setupListeners() {
@@ -98,6 +104,8 @@ class MainActivity : AppCompatActivity() {
     fun setupAdapter(list: List<Repository>) {
         val repositoryAdapter = RepositoryAdapter(list)
 
+        updateImg(list)
+
         repositoryAdapter.btnShareLister = { repository ->
             shareRepositoryLink(repository.htmlUrl)
         }
@@ -129,6 +137,13 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
+    }
+
+    fun updateImg(list: List<Repository>){
+        if (list.size>0){
+            Glide.with(binding.root.context)
+                .load(list[0].owner.avatarURL).into(binding.imgPerfil)
+        }
     }
 
 }

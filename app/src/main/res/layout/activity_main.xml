@@ -14,7 +14,23 @@
         android:layout_margin="16dp"
         android:text="@string/app_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_perfil"
+        />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/img_perfil"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:src="@drawable/icone_git"
+        android:layout_margin="16dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <EditText
         android:id="@+id/et_nome_usuario"
@@ -49,5 +65,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_confirmar"
         tools:listitem="@layout/repository_item" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

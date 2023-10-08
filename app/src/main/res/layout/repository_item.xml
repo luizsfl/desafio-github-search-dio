@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:elevation="24dp"
-        app:cardBackgroundColor="@color/gray"
-        app:cardCornerRadius="24dp"
+        app:cardCornerRadius="15dp"
+        app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,7 +20,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_card_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <ImageView
                 android:id="@+id/iv_favorite"
@@ -35,16 +36,53 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_name"
-                style="@style/TextAppearance.AppCompat.Body2"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Nome do repositorio" />
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                >
+                <TextView
+                    android:id="@+id/tv_name"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    tools:text="Nome do repositorio"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:id="@+id/tv_see"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    tools:text="Estrela: 0"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:id="@+id/tv_fork"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    tools:text="Fork: 0"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:id="@+id/tv_star"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    tools:text="Estrela: 0"
+                    android:textStyle="bold"
+                    />
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

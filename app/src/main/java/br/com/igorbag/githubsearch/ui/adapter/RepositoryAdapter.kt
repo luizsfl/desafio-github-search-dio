@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.igorbag.githubsearch.databinding.RepositoryItemBinding
 import br.com.igorbag.githubsearch.domain.Repository
+import com.bumptech.glide.Glide
 
 class RepositoryAdapter(private val repositories: List<Repository>) :
     RecyclerView.Adapter<RepositoryAdapter.ViewHolder>() {
@@ -37,7 +38,10 @@ class RepositoryAdapter(private val repositories: List<Repository>) :
 
     class ViewHolder(val binding: RepositoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Repository) {
-            binding.tvName.text = item.name
+            binding.tvName.text = "Nome: ${item.name}"
+            binding.tvStar.text = "Estrela: ${item.stargazersCount}"
+            binding.tvFork.text = "Fork: ${item.forks_count}"
+            binding.tvSee.text  = "Assistindo: ${item.watchers_count}"
         }
     }
 
