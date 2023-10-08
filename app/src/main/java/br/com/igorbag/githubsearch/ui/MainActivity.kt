@@ -16,6 +16,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 //https://square.github.io/retrofit/
 //URL_BASE da API do  GitHub= https://api.github.com/
 
@@ -96,12 +97,19 @@ class MainActivity : AppCompatActivity() {
 
     fun setupAdapter(list: List<Repository>) {
         val repositoryAdapter = RepositoryAdapter(list)
+
+        repositoryAdapter.btnShareLister = { repository ->
+            shareRepositoryLink(repository.htmlUrl)
+        }
+
+        repositoryAdapter.carItemLister = { repository ->
+            openBrowser(repository.htmlUrl)
+        }
+
         binding.rvListaRepositories.adapter = repositoryAdapter
 
     }
 
-    // Metodo responsavel por compartilhar o link do repositorio selecionado
-    // @Todo 11 - Colocar esse metodo no click do share item do adapter
     fun shareRepositoryLink(urlRepository: String) {
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
@@ -113,9 +121,6 @@ class MainActivity : AppCompatActivity() {
         startActivity(shareIntent)
     }
 
-    // Metodo responsavel por abrir o browser com o link informado do repositorio
-
-    // @Todo 12 - Colocar esse metodo no click item do adapter
     fun openBrowser(urlRepository: String) {
         startActivity(
             Intent(
