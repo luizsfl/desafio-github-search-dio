@@ -1,29 +1,32 @@
-package br.com.igorbag.githubsearch.ui
+package br.com.igorbag.githubsearch.presentation
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import br.com.igorbag.githubsearch.R
-import br.com.igorbag.githubsearch.data.GitHubService
+import br.com.igorbag.githubsearch.core.ViewState
+import br.com.igorbag.githubsearch.data.remote.GitHubService
 import br.com.igorbag.githubsearch.databinding.ActivityMainBinding
-import br.com.igorbag.githubsearch.domain.Repository
-import br.com.igorbag.githubsearch.ui.adapter.RepositoryAdapter
+import br.com.igorbag.githubsearch.domain.model.Repository
+import br.com.igorbag.githubsearch.presentation.adapter.RepositoryAdapter
 import com.bumptech.glide.Glide
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 //https://square.github.io/retrofit/
 //URL_BASE da API do  GitHub= https://api.github.com/
 
 class MainActivity : AppCompatActivity() {
-    
+
+    private val viewModel: MainViewModel by viewModel()
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     lateinit var gitHubService: GitHubService
 
@@ -35,6 +38,17 @@ class MainActivity : AppCompatActivity() {
         getAllReposByUserName(binding.etNomeUsuario.text.toString())
         setupListeners()
         setupView()
+        setupObserv()
+    }
+
+    private fun setupObserv() {
+        viewModel.viewState.observe(this) { state ->
+            when (state) {
+                is ViewState.SetLoading ->  showLoading(state.isLoading)
+                is ViewState.SetRepositoryList -> setupAdapter(state.listRepository)
+                is ViewState.LoadFailure -> showErro(state.messageError)
+            }
+        }
     }
 
     fun setupView(){
@@ -72,36 +86,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getAllReposByUserName(name:String) {
-
         if(name.isNotEmpty()) {
-            binding.progressBar.isVisible = true
-            gitHubService.getAllRepositoriesByUser(name)
-                .enqueue(object : Callback<List<Repository>> {
-                    override fun onResponse(
-                        call: Call<List<Repository>>,
-                        response: Response<List<Repository>>
-                    ) {
-                        if (response.isSuccessful) {
-                            response.body()?.let {
-                                setupAdapter(it)
-                            }
-                        } else {
-                            Toast.makeText(
-                                this@MainActivity,
-                                R.string.response_erro,
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                        binding.progressBar.isVisible = false
-                    }
-
-                    override fun onFailure(call: Call<List<Repository>>, t: Throwable) {
-                        Toast.makeText(this@MainActivity, R.string.response_erro, Toast.LENGTH_LONG)
-                            .show()
-                        binding.progressBar.isVisible = false
-                    }
-
-                })
+           viewModel.getAllRepository(name)
         }
     }
 
@@ -148,6 +134,15 @@ class MainActivity : AppCompatActivity() {
             Glide.with(binding.root.context)
                 .load(list[0].owner.avatarURL).into(binding.imgPerfil)
         }
+    }
+
+    fun showLoading(loading:Boolean){
+        binding.progressBar.isVisible = loading
+    }
+
+    fun showErro(MessengerErro:String){
+        Toast.makeText(this@MainActivity, R.string.response_erro, Toast.LENGTH_LONG)
+            .show()
     }
 
 }
